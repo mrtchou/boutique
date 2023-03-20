@@ -4,4 +4,9 @@
 
 <h1> La boutique de vetements</h1>
 
+{% for product in products %}
+    <h2>Nom du produit : {{ product.name }}</h2>
+    image du produit :<img src="{{ product.thumbnail.url }}" alt="{{ product.name }}">
+{% endfor %}
+
 {% endblock %}
