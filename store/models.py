@@ -62,4 +62,14 @@ class Order(models.Model):
 - Date de la commande (pour savoir quand la commande a ete faite)
 """
 
-class Order(models.Model):
+class Card(models.Model):
+    #un user peut avoir que un panier(card)
+    #supprime en cascade, si pas user donc pas card
+    user = models.OneToOneField(AUTH_USER_MODEL, on_delete=models.CASCADE)
+    #plusieurs articles peuvent etre ajouter au panier
+    orders = models.ManyToManyField(Order)
+    ordered = models.BooleanField(default=False)
+    ordered_date = models.DateTimeField(blank=True, null=True)
+
+    def __str__(self):
+        return self.user.username
