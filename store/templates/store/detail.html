@@ -9,6 +9,8 @@
     <p> Description :<br/>{{ product.description }}</p>
     <h3>{{ product.price }} euros (il reste en stock :{{ product.stock }})</h3>
    
-
+    {% if user.is_authenticated %}
+    <p><a href="{% url 'add_to_card' product.slug%}">Ajouter au panier</a></p>
+    {% endif %}
 
 {% endblock %}
