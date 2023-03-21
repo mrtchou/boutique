@@ -1,4 +1,5 @@
 from django.db import models
+from shop.settings import AUTH_USER_MODEL
 
 # Create your models here.
 
@@ -11,7 +12,6 @@ Product
 - Description (chaine de caracteres)
 - Image
 """
-
 class Product(models.Model):
     name = models.CharField(max_length=128)
     slug = models.SlugField(max_length=128)
@@ -22,3 +22,44 @@ class Product(models.Model):
 
     def __str__(self):
         return f"{self.name}"
+    
+    def get_absolute_url(self):
+        return reverse("product", kwargs={"slug": self.slug})
+    
+
+
+
+
+#Article (order)
+"""
+- utilisateur (celui qui souhaite acheter => champ)
+- produit (ce qu'on veut acheter =>)
+- Quantité (combien d'articles on veut => int)
+- Commandé ou non (commandé donc payé ou pas =>boolean)
+"""
+class Order(models.Model):
+    #un à plusieurs pour la relation. 
+    # un user peut avoir plusieur articles, 
+    # et supprime en cascade pour supprimer les articles, 
+    # si user est supprimer
+    user = models.ForeignKey(AUTH_USER_MODEL, on_delete=models.CASCADE) 
+    product = models.ForeignKey(Product, on_delete=models.CASCADE)
+    quantity = models.IntegerField(default=1)
+    ordered = models.BooleanField(default=False)
+
+    def __str__(self):
+        return f"{self.product.name} ({self.quantity})"
+
+
+
+
+
+#Panier (Card)
+"""
+- Utilisateur (chaque utilisateur a un panier =>)
+- Articles (plusieurs articles dans le panier =>)
+- Commandé ou non (donc passé commande ou pas encore)
+- Date de la commande (pour savoir quand la commande a ete faite)
+"""
+
+class Order(models.Model):
