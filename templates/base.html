@@ -15,6 +15,7 @@
     <a href="{% url 'logout' %}">Se deconnecter</a>
 {% else %}
     <a href="{% url 'signup' %}">S'inscrire</a>
+    <a href="{% url 'login' %}">Connexion</a>
 {% endif %}
     {% block content %}
 
