@@ -17,6 +17,18 @@
     <a href="{% url 'signup' %}">S'inscrire</a>
     <a href="{% url 'login' %}">Connexion</a>
 {% endif %}
+
+
+
+
+
+
+{% if user.card %}
+
+<a href="{% url 'card' %}">Voir le panier {{ user.card.orders.count }}</a>
+
+{% endif %}
+
     {% block content %}
 
     {% endblock %}
