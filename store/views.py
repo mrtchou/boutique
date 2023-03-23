@@ -33,10 +33,14 @@ def add_to_card(request, slug):
     # convention une variable qui ne sera pas utilisé 
     # par la suite
     card, _ = Card.objects.get_or_create(user=user)
+
+
     #donc cela verifie si un produit est associé avec cet user, donc on recupere
     #si non on cré un new card(created)
     order, created = Order.objects.get_or_create(user=user,
                                                  product=product)
+    
+    
     #cas ou n'existais pas, donc créé
     if created:
         #donc dans card(panier) on ajoute dans champ orders dans db le order(produit) plus haut l'element qu'on a recuperé avec le bouton ajouter au panier...
@@ -47,3 +51,8 @@ def add_to_card(request, slug):
         order.save()
 
     return redirect(reverse("product", kwargs={"slug":slug}))
+
+
+def card(request):
+    card = get_object_or_404(Card, user=request.user)
+    return render(request, 'store/card.html', context={"orders": card.orders.all()})

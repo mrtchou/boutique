@@ -21,6 +21,8 @@ def logout_user(request):
     return redirect('index')
 
 
+
+
 def login_user(request):
     if request.method == "POST":
         username = request.POST.get("username")
