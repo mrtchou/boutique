@@ -9,5 +9,5 @@
 <p>{{ order.quantity }} dans le panier</p>
 
 {% endfor %}
-
+<a href="{% url 'delete_card' %}">Supprimer le panier</a>
 {% endblock %}

@@ -56,3 +56,12 @@ def add_to_card(request, slug):
 def card(request):
     card = get_object_or_404(Card, user=request.user)
     return render(request, 'store/card.html', context={"orders": card.orders.all()})
+
+
+def delete_card(request):
+    card = request.user.card
+    if card:
+        card.orders.all().delete()
+        card.delete()
+
+    return redirect('index')

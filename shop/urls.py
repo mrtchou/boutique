@@ -15,7 +15,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from store.views import index, product_detail, add_to_card, card
+from store.views import index, product_detail, add_to_card, card, delete_card
 from shop import settings
 from django.conf.urls.static import static
 from accounts.views import signup, logout_user, login_user
@@ -26,6 +26,7 @@ urlpatterns = [
     path('product/<str:slug>', product_detail, name="product"),
     path('product/<str:slug>/add_to_card', add_to_card, name="add_to_card"),
     path('card', card, name="card"),
+    path('card/delete', delete_card, name="delete_card"),
     path('signup', signup, name="signup"),
     path('logout', logout_user, name="logout"),
     path('login', login_user, name="login"),
